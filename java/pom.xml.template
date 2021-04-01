@@ -2,11 +2,15 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.rocksdb</groupId>
+    <groupId>org.jetbrains</groupId>
     <artifactId>rocksdbjni</artifactId>
-    <version>${ROCKSDB_JAVA_VERSION}</version>  <!-- this will be replaced by the Makefile's rocksdbjavageneratepom target -->
+    <!--
+    Don't update this version manually, bump ROCKSDB_FORK in Makefile.
+    This file will be overridden by "make rocksdbjavageneratepom".
+    -->
+    <version>${ROCKSDB_JAVA_VERSION}</version>
 
-    <name>RocksDB JNI</name>
+    <name>RocksDB JNI (JetBrains fork)</name>
     <description>RocksDB fat jar that contains .so files for linux32 and linux64 (glibc and musl-libc), jnilib files
         for Mac OSX, and a .dll for Windows x64.
     </description>
@@ -19,32 +23,24 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
             <distribution>repo</distribution>
         </license>
-        <license>
-            <name>GNU General Public License, version 2</name>
-            <url>http://www.gnu.org/licenses/gpl-2.0.html</url>
-            <distribution>repo</distribution>
-        </license>
     </licenses>
 
     <scm>
-        <connection>scm:git:https://github.com/facebook/rocksdb.git</connection>
-        <developerConnection>scm:git:https://github.com/facebook/rocksdb.git</developerConnection>
-        <url>scm:git:https://github.com/facebook/rocksdb.git</url>
+        <connection>scm:git:ssh://git@git.jetbrains.team/rocksdb-lab-88-fork/rocksdb-fork.git</connection>
+        <developerConnection>scm:git:ssh://git@git.jetbrains.team/rocksdb-lab-88-fork/rocksdb-fork.git</developerConnection>
+        <url>scm:git:ssh://git@git.jetbrains.team/rocksdb-lab-88-fork/rocksdb-fork.git</url>
     </scm>
 
     <organization>
-        <name>Facebook</name>
-        <url>https://www.facebook.com</url>
+        <name>JetBrains</name>
+        <url>https://www.jetbrains.com</url>
     </organization>
 
     <developers>
         <developer>
-            <name>Facebook</name>
-            <email>help@facebook.com</email>
-            <timezone>America/New_York</timezone>
-            <roles>
-                <role>architect</role>
-            </roles>
+            <name>Mikhail Golubev</name>
+            <email>mikhail.golubev@jetbrains.com</email>
+            <timezone>Europe/Moscow</timezone>
         </developer>
     </developers>
 
@@ -71,8 +67,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <source>${project.build.source}</source>
-                    <target>${project.build.target}</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
@@ -82,7 +78,7 @@
                 <version>2.18.1</version>
                 <configuration>
                     <argLine>${argLine} -ea -Xcheck:jni -Djava.library.path=${project.build.directory}</argLine>
-                    <useManifestOnlyJar>false</useManifestOnlyJar>  
+                    <useManifestOnlyJar>false</useManifestOnlyJar>
                     <useSystemClassLoader>false</useSystemClassLoader>
                     <additionalClasspathElements>
                         <additionalClasspathElement>${project.build.directory}/*</additionalClasspathElement>
