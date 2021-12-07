@@ -298,6 +298,13 @@ public class ColumnFamilyOptions extends RocksObject
   }
 
   @Override
+  public ColumnFamilyOptions useFixedLengthPrefixExtractorForMemtableInsert(int prefixLength) {
+    assert(isOwningHandle());
+    useFixedLengthPrefixExtractorForMemtableInsert(nativeHandle_, prefixLength);
+    return this;
+  }
+
+  @Override
   public ColumnFamilyOptions useFixedLengthPrefixExtractor(final int n) {
     assert(isOwningHandle());
     useFixedLengthPrefixExtractor(nativeHandle_, n);
@@ -1365,6 +1372,8 @@ public class ColumnFamilyOptions extends RocksObject
       final long bottommostCompressionOptionsHandle);
   private native void setCompressionOptions(long handle,
       long compressionOptionsHandle);
+  private native void useFixedLengthPrefixExtractorForMemtableInsert(
+        long handle, int prefixLength);
   private native void useFixedLengthPrefixExtractor(
       long handle, int prefixLength);
   private native void useCappedPrefixExtractor(

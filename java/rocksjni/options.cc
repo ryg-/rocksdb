@@ -1136,6 +1136,17 @@ void Java_org_rocksdb_Options_setTableCacheNumshardbits(
 }
 
 /*
+ * Method:    useFixedLengthPrefixExtractorForMemtableInsert
+ * Signature: (JI)V
+ */
+void Java_org_rocksdb_Options_useFixedLengthPrefixExtractorForMemtableInsert(
+    JNIEnv*, jobject, jlong jhandle, jint jprefix_length) {
+  reinterpret_cast<ROCKSDB_NAMESPACE::Options*>(jhandle)
+      ->memtable_insert_with_hint_prefix_extractor.reset(ROCKSDB_NAMESPACE::NewFixedPrefixTransform(
+          static_cast<int>(jprefix_length)));
+}
+
+/*
  * Method:    useFixedLengthPrefixExtractor
  * Signature: (JI)V
  */
@@ -4288,6 +4299,17 @@ jstring Java_org_rocksdb_ColumnFamilyOptions_memTableFactoryName(
   }
 
   return env->NewStringUTF(tf->Name());
+}
+
+/*
+ * Method:    useFixedLengthPrefixExtractorForMemtableInsert
+ * Signature: (JI)V
+ */
+void Java_org_rocksdb_ColumnFamilyOptions_useFixedLengthPrefixExtractorForMemtableInsert(
+    JNIEnv*, jobject, jlong jhandle, jint jprefix_length) {
+  reinterpret_cast<ROCKSDB_NAMESPACE::Options*>(jhandle)
+      ->memtable_insert_with_hint_prefix_extractor.reset(ROCKSDB_NAMESPACE::NewFixedPrefixTransform(
+          static_cast<int>(jprefix_length)));
 }
 
 /*

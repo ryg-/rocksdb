@@ -154,6 +154,8 @@ public interface AdvancedColumnFamilyOptionsInterface<
    */
   int bloomLocality();
 
+  T useFixedLengthPrefixExtractorForMemtableInsert(int prefixLength);
+
   /**
    * <p>Different levels can have different compression
    * policies. There are cases where most lower levels
