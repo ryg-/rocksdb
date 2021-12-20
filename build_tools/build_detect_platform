@@ -407,6 +407,8 @@ EOF
             PLATFORM_LDFLAGS="$PLATFORM_LDFLAGS -lnuma"
             JAVA_LDFLAGS="$JAVA_LDFLAGS -lnuma"
         fi
+    else
+        echo "numa is forcibly disabled"
     fi
 
     if ! test $ROCKSDB_DISABLE_TBB; then
@@ -420,6 +422,8 @@ EOF
             PLATFORM_LDFLAGS="$PLATFORM_LDFLAGS -ltbb"
             JAVA_LDFLAGS="$JAVA_LDFLAGS -ltbb"
         fi
+    else
+        echo "tbb is forcibly disabled"
     fi
 
     if ! test $ROCKSDB_DISABLE_JEMALLOC; then
@@ -442,6 +446,8 @@ EOF
                 fi
             fi
         fi
+    else
+        echo "jemalloc is forcibly disabled"
     fi
     if ! test $JEMALLOC && ! test $ROCKSDB_DISABLE_TCMALLOC; then
         # jemalloc is not available. Let's try tcmalloc
@@ -481,6 +487,8 @@ EOF
             PLATFORM_LDFLAGS="$PLATFORM_LDFLAGS -lmemkind"
             JAVA_LDFLAGS="$JAVA_LDFLAGS -lmemkind"
         fi
+    else
+        echo "memkind is forcibly disabled"
     fi
 
     if ! test $ROCKSDB_DISABLE_PTHREAD_MUTEX_ADAPTIVE_NP; then
