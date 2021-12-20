@@ -6,8 +6,8 @@ then
   PLATFORM=32
 fi
 
-ROCKS_JAR=`find target -name rocksdbjni*.jar`
+ROCKS_JAR=`find target -name rocksdbjni*.jar | tr '\n' ':'`
 
 echo "Running benchmark in $PLATFORM-Bit mode."
 # shellcheck disable=SC2068
-java -server -d$PLATFORM -XX:NewSize=4m -XX:+AggressiveOpts -Djava.library.path=target -cp "${ROCKS_JAR}:benchmark/target/classes" org.rocksdb.benchmark.DbBenchmark $@
+java -XX:NewSize=4m -Djava.library.path=target -cp "${ROCKS_JAR}:benchmark/target/classes" org.rocksdb.benchmark.DbBenchmark $@
