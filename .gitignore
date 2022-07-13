@@ -30,6 +30,7 @@ rocksdb.pc
 CMakeCache.txt
 CMakeFiles/
 build/
+cmake-build-debug/
 
 ldb
 manifest_dump
@@ -62,6 +63,8 @@ java/target
 java/test-libs
 java/*.log
 java/include/org_rocksdb_*.h
+java/jmh/target/
+java/pom.xml
 
 .idea/
 *.iml
@@ -94,3 +97,14 @@ fuzz/crash-*
 
 cmake-build-*
 third-party/folly/
+
+/snappy-*/
+/snappy-*.tar.gz
+/zstd-*/
+/zstd-*.tar.gz
+/lz4-*/
+/lz4-*.tar.gz
+/bzip2-*/
+/bzip2-*.tar.gz
+/zlib-*/
+/zlib-*.tar.gz
