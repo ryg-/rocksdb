@@ -2261,6 +2261,13 @@ rocksdbjavastaticreleasedocker: rocksdbjavastaticosx rocksdbjavastaticdockerx86 
 	cd java/target/classes; $(JAR_CMD) -uf ../$(ROCKSDB_JAR_ALL) org/rocksdb/*.class org/rocksdb/util/*.class
 	openssl $(JAR_SHA) java/target/$(ROCKSDB_JAR_ALL) | sed 's/.*= \([0-9a-f]*\)/\1/' > java/target/$(ROCKSDB_JAR_ALL).$(JAR_SHA)
 
+
+rocksdbjavastaticbuildfatjar:
+	cd java; jar -cf target/$(ROCKSDB_JAR_ALL) HISTORY*.md
+	cd java/target; jar -uf $(ROCKSDB_JAR_ALL) librocksdbjni-*.so librocksdbjni-*.*
+	cd java/target/classes; jar -uf ../$(ROCKSDB_JAR_ALL) org/rocksdb/*.class org/rocksdb/util/*.class
+	openssl $(JAR_SHA) java/target/$(ROCKSDB_JAR_ALL) | sed 's/.*= \([0-9a-f]*\)/\1/' > java/target/$(ROCKSDB_JAR_ALL).$(JAR_SHA)
+
 rocksdbjavastaticdockerx86:
 	mkdir -p java/target
 	docker run --rm --name rocksdb_linux_x86-be --platform linux/386 --attach stdin --attach stdout --attach stderr --volume $(HOME)/.m2:/root/.m2:ro --volume `pwd`:/rocksdb-host:ro --volume /rocksdb-local-build --volume `pwd`/java/target:/rocksdb-java-target --env DEBUG_LEVEL=$(DEBUG_LEVEL) evolvedbinary/rocksjava:centos6_x86-be /rocksdb-host/java/crossbuild/docker-build-linux-centos.sh
